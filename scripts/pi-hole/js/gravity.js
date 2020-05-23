@@ -21,14 +21,14 @@ function eventsource() {
 
   ta.html("");
   ta.show();
-  alInfo.show();
-  alSuccess.hide();
+  alInfo.removeClass("d-none");
+  alSuccess.addClass("d-none");
 
   source.addEventListener(
     "message",
     function (e) {
       if (e.data.indexOf("Pi-hole blocking is") !== -1) {
-        alSuccess.show();
+        alSuccess.removeClass("d-none");
       }
 
       // Detect ${OVER}
@@ -49,7 +49,7 @@ function eventsource() {
     "error",
     function () {
       alInfo.delay(1000).fadeOut(2000, function () {
-        alInfo.hide();
+        alInfo.addClass("d-none");
       });
       source.close();
       $("#gravityBtn").removeAttr("disabled");
